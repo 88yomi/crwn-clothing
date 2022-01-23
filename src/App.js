@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 
 import { connect } from 'react-redux';
@@ -47,12 +47,18 @@ class App extends React.Component {
     return (
       <div>
         <Header />
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/shop' element={<ShopPage />} />
-          <Route path='/signin' element={this.props.currentUser ? (<Navigate to='/' />) : (<SignInAndSignUpPage />)} />
-          <Route path='/checkout' element={<CheckoutPage />}/>
-        </Routes>
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route path='/shop' component={ShopPage} />
+          <Route path='/checkout' component={CheckoutPage} />
+          <Route
+            exact
+            path='/signin'
+            render={() =>
+              this.props.currentUser
+                ? (<Redirect to='/' />)
+                : (<SignInAndSignUpPage />)} />
+        </Switch>
       </div>
     )
   }

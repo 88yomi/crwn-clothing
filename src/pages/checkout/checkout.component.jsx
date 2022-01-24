@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
+import PaystackCheckoutButton from '../../components/paystack-button/paystack-button.component';
 
 import { selectCartItems, selectCartTotal } from '../../redux/cart/cart.selectors';
 
@@ -29,13 +30,11 @@ const CheckoutPage = ({ cartItems, total }) => (
 		</div>
 		{
 			cartItems.map(cartItem =>
-				<CheckoutItem id={cartItem.id} cartItem={cartItem}/>
+				<CheckoutItem id={cartItem.id} cartItem={cartItem} />
 			)
 		}
-
-		<div className="total">
-			<span>TOTAL: ${total}</span>
-		</div>
+		<div className="total">TOTAL: ${total}</div>
+		<PaystackCheckoutButton amount={total} />
 	</div>
 );
 

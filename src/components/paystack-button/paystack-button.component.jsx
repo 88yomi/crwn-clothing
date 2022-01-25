@@ -5,10 +5,10 @@ import { PaystackButton } from 'react-paystack';
 const PaystackCheckoutButton = ({ amount }) => {
 	// convert the amount from dollars and store it to amount
 	amount = amount * 512 * 100;
-	const publicKey = 'pk_test_609b5f30bdf74450961b0df0dc0d60d5d4661b65';
+	const publicKey = process.env.REACT__APP__API__KEY;
 
-	const onSuccess = (successThing) => {
-		console.log('Success message:', successThing)
+	const onSuccess = (successResponse) => {
+		console.log('Success message:', successResponse)
 		alert('Payment Successful')
 	}
 
